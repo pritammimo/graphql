@@ -11,6 +11,10 @@ const server=new ApolloServer({
       Query,
       Category,
       Product
+   },
+   context:{
+    categories,
+    products
    }
 });
 server.listen().then(({url})=>{

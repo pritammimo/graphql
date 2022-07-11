@@ -8,6 +8,9 @@ type Query {
     category(id:ID!):Category,
     # reviews:[Review!]!
 }
+type Mutation{
+    addCategory(input:AddCategoryInput!):Category!
+}
 type Product{
    name:String!,
    description:String!,
@@ -35,5 +38,8 @@ type Review{
 input ProductsFilterInput{
     onSale:Boolean,
     avgRating:Int
+}
+input AddCategoryInput{
+    name:String!
 }
 `

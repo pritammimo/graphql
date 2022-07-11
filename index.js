@@ -121,11 +121,13 @@ type Product{
    price:Float!,
    onSale:Boolean,
    image:String!,
-   id:ID!
+   id:ID!,
+   category:Category
 }
 type Category {
     name:String!,
-    id:ID!
+    id:ID!,
+    products:[Product!]!,
 }
 `
 const resolvers={
@@ -147,9 +149,21 @@ const resolvers={
             const {id}=args;
           
             return categories.find(category =>category.id === id)
-            // if(!product) return null;
+         
            
            },
+    },
+    Category:{
+      products:(parent,args,context)=>{
+        const categoryId=parent.id;
+        return products.filter((product)=>product.categoryId === categoryId)
+      }
+    },
+    Product:{
+      category:(parent,args,context)=>{
+        const categoryId=parent.categoryId;
+        return categories.find((category)=>category.id === categoryId)
+      }
     }
 }
 const server=new ApolloServer({

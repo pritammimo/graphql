@@ -6,15 +6,17 @@ type Query {
     product(id:ID!):Product,
     categories:[Category!]!,
     category(id:ID!):Category,
-    # reviews:[Review!]!
+
 }
 type Mutation{
     addCategory(input:AddCategoryInput!):Category!
+    addProduct(input:AddProductInput!):Product!
+    addReview(input:AddReviewInput!):Review!
 }
 type Product{
    name:String!,
    description:String!,
-   Quantity:Int!,
+   quantity:Int!,
    price:Float!,
    onSale:Boolean,
    image:String!,
@@ -42,4 +44,20 @@ input ProductsFilterInput{
 input AddCategoryInput{
     name:String!
 }
+input AddProductInput{
+    name:String!,
+   description:String!,
+   quantity:Int!,
+   price:Float!,
+   onSale:Boolean,
+   image:String!,
+   categoryId:String!
+   }
+   input AddReviewInput{
+    date:String!,
+    title: String!,
+    comment: String!,
+    rating: Int!,
+    productId:String!
+   }
 `

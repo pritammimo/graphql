@@ -58,5 +58,35 @@ exports.Mutation={
     deleteReview:(parent,{id},{db})=>{
       db.reviews=db.reviews.filter((review)=>review.id !==id);
       return true;
+    },
+    updateCategory:(parent,{id,input},{db})=>{
+     const index=db.categories.findIndex(category =>category.id ===id);
+     if(index === -1) return null
+    db.categories[index]={
+        ...db.categories[index],
+        ...input
     }
+    return db.categories[index]
+
+    },
+    updateProduct:(parent,{id,input},{db})=>{
+      const index=db.products.findIndex(product =>product.id ===id)
+      if(index === -1) return null
+     db.products[index]={
+         ...db.products[index],
+         ...input
+     }
+     return db.products[index]
+ 
+     },
+     updateReview:(parent,{id,input},{db})=>{
+      const index=db.Reviews.findIndex(review =>review.id ===id)
+      if(index === -1) return null
+     db.Reviews[index]={
+         ...db.Reviews[index],
+         ...input
+     }
+     return db.Reviews[index]
+ 
+     }
 }
